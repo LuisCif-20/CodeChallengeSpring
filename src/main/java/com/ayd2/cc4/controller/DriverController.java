@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ayd2.cc4.dto.DriverDto;
 import com.ayd2.cc4.model.Driver;
 import com.ayd2.cc4.service.DriverService;
 
@@ -26,8 +27,8 @@ public class DriverController {
     }
 
     @PostMapping()
-    public ResponseEntity<Driver> createDriver() {
-        return ResponseEntity.status(201).body(null);
+    public ResponseEntity<Driver> createDriver(DriverDto driverDto) {
+        return ResponseEntity.status(201).body(this.driverService.createDriver(driverDto));
     }
     
 }
