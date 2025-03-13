@@ -2,29 +2,19 @@ package com.ayd2.cc4.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.ayd2.cc4.dto.DriverDto;
+import com.ayd2.cc4.dto.UpdateDriverDto;
 import com.ayd2.cc4.model.Driver;
-import com.ayd2.cc4.repository.DriverRepository;
+import com.ayd2.cc4.response.DriverResponse;
 
-import lombok.RequiredArgsConstructor;
-
-@Service
-@RequiredArgsConstructor
-public class DriverService {
+public interface DriverService {
     
-    private final DriverRepository driverRepository;
+    DriverResponse createDriver (DriverDto newDriver);
 
-    public List<Driver> getAllDrivers() {
-        return this.driverRepository.findAll();
-    }
+    List<Driver> findAllDrivers();
+    
+    DriverResponse updateDriver(String driverId, UpdateDriverDto updateDriverDto);
 
-    public Driver createDriver(final DriverDto driverDto) {
-        final Driver driver = new Driver();
-        driver.setName(driverDto.getName());
-        driver.setAge(driverDto.getAge());
-        return this.driverRepository.save(driver);
-    }
-
+    void deleteDriver(String driverId);
+    
 }

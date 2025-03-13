@@ -7,18 +7,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table
-@Getter
-@Setter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
+@EqualsAndHashCode(of = "id")
 public class Driver {
 
     @Id

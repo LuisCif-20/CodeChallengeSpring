@@ -19,7 +19,8 @@ import static org.mockito.BDDMockito.given;
 
 import com.ayd2.cc4.dto.DriverDto;
 import com.ayd2.cc4.model.Driver;
-import com.ayd2.cc4.service.DriverService;
+import com.ayd2.cc4.response.DriverResponse;
+import com.ayd2.cc4.service.DriverServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(controllers = DriverController.class)
@@ -33,11 +34,13 @@ public class DriverControllerTest {
     private ObjectMapper objectMapper;
 
     @MockitoBean
-    private DriverService driverService;
+    private DriverServiceImpl driverServiceiImpl;
 
     private DriverDto driverDto;
 
     private Driver driver;
+
+    private DriverResponse driverResponse;
 
     @BeforeEach()
     public void init() {
@@ -48,18 +51,18 @@ public class DriverControllerTest {
             .name("Luis Nery Cifuentes Rodas")
             .age(22)
             .build();
+        driverResponse = new DriverResponse(driver);
     }
 
     @Test
-    public void createDriverShouldReturnOk() throws Exception {
-        given(this.driverService.createDriver(driverDto)).willReturn(driver);
+    public void createDriverShouldReturnCreated() throws Exception {
+        given(this.driverServiceiImpl.createDriver(driverDto)).willReturn(driverResponse);
         ResultActions response = mockMvc.perform(
             post("/driver")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(driverDto))
         );
         response.andExpect(status().isCreated());
-        // verify(driverService, times(1)).createDriver(driverDto);
     }
 
 }

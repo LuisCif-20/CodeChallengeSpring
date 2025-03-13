@@ -6,4 +6,6 @@ import com.ayd2.cc4.model.Driver;
 
 public interface DriverRepository extends JpaRepository<Driver, String>{
 
+    boolean existsByName(String name);
+
 }
